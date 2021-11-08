@@ -14,8 +14,8 @@ namespace PierresTreats
     public Startup(IWebHostEnvironment env)
     {
       var builder = new ConfigurationBuilder()
-          .SetBasePath(env.ContentRootPath)
-          .AddJsonFile("appsettings.json");
+        .SetBasePath(env.ContentRootPath)
+        .AddJsonFile("appsettings.json");
       Configuration = builder.Build();
     }
 
@@ -28,31 +28,30 @@ namespace PierresTreats
       services.AddEntityFrameworkMySql()
         .AddDbContext<PierresTreatsContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
-    
-       services.AddIdentity<ApplicationUser, IdentityRole>()
-          .AddEntityFrameworkStores<ToDoListContext>()
-          .AddDefaultTokenProviders();
-    
 
-    services.AddIdenity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<PierresTreatsContext>()
-    .AddDefaultTokenProviders();
+      services.AddIdentity<ApplicationUser, IdentityRole>()
+        .AddEntityFrameworkStores<PierresTreatsContext>()
+        .AddDefaultTokenProviders();
 
-    services.Configure<IdentityOptions>(options =>
+      services.Configure<IdentityOptions>(options =>
       {
         options.Password.RequireDigit = false;
         options.Password.RequiredLength = 0;
-        options.Password.RequireLowerCase = false;
+        options.Password.RequireLowercase = false;
         options.Password.RequireNonAlphanumeric = false;
-        options.Password.RequireUpperCase = false;
-        options.Password.RequireUniqueChars = 0;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredUniqueChars = 0;
       });
     }
+
     public void Configure(IApplicationBuilder app)
     {
       app.UseDeveloperExceptionPage();
-      app.UseAuthentication();
+
+      app.UseAuthentication(); 
+
       app.UseRouting();
+
       app.UseAuthorization();
 
       app.UseEndpoints(routes =>
@@ -61,10 +60,10 @@ namespace PierresTreats
       });
 
       app.UseStaticFiles();
-      
+
       app.Run(async (context) =>
       {
-        await context.Response.WriteAsync("Page not found!");
+        await context.Response.WriteAsync("Hello World!");
       });
     }
   }
