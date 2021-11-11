@@ -19,11 +19,14 @@
     }
   </ul>
 
-<ul>
-  <li>@Html.ActionLink("Add a new flavor","Create")</li>
-</ul>
+  <h3>Your flavors</h3>
+  <ul>
+      @foreach (Flavor flavor in ViewBag.UserFlavors)
+      {
+        <li>@Html.ActionLink($"{flavor.Description}","Details", new { id = flavor.FlavorId})</li>
+      }
+  <ul>
 
-<hr />
-<ul>
+  <li>@Html.ActionLink("Add a new flavor","Create")</li>
   <li>@Html.ActionLink("Home","Index","Home")</li>
 </ul>
