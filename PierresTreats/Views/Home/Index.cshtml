@@ -1,10 +1,39 @@
 @{
   Layout = "_Layout";
 }
+@using PierresTreats.Models;
 
 <h1>Pierre's Treats</h1>
 <p>Savory and Sweet Flavors at Your Heart's Content!</p>
 
+
+      <h3>Treats</h3>
+      @if (@ViewBag.TreatsList.Count == 0)
+      {
+        <p>We currently do not have any treats.</p>
+      }
+      @foreach(Treat treat in @ViewBag.TreatsList)
+      {
+        <li>@Html.ActionLink($"{treat.Name}","Details", "Treats", new {id = treat.TreatId})</li>
+      }
+      <h3>Flavors</h3>
+      @if (@ViewBag.FlavorsList.Count == 0)
+      {
+        <p>We currently do not have any flavors.</p>
+      }
+
+      @foreach(Flavor flavor in @ViewBag.FlavorsList)
+      {
+        <li>@Html.ActionLink($"{flavor.Description}","Details", "Flavors", new {id = flavor.FlavorId})</li>
+      }
+
+
+
+
+
+
 <ul>
   <i>@Html.ActionLink("Login or Register","Index","Account")</i>
 </ul>
+
+
